@@ -3,6 +3,7 @@
 import SimpleHTTPServer
 import SocketServer
 import os
+import logging
 
 PORT = int(os.environ.get('PORT', 8000))
 
@@ -10,6 +11,7 @@ class GetHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         self.send_head()
+        logging.error(self.headers)
         for h in self.headers:
             self.send_header(h, self.headers[h])
         self.end_headers()
